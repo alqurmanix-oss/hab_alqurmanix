@@ -1,1 +1,565 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALQURMANI X | القرماني إكس | AQX</title>
+    <!-- Google Fonts & FontAwesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Cinzel:wght@500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --gold-primary: #D4AF37;
+            --gold-light: #FFDF00;
+            --gold-dark: #AA771C;
+            --gold-gradient: linear-gradient(135deg, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
+            --bg-deep: #050508;
+            --card-bg: rgba(18, 18, 28, 0.65);
+            --card-border: rgba(212, 175, 55, 0.25);
+            --text-light: #F5F5F7;
+            --text-dim: #A1A1AA;
+        }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+            user-select: none;
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-light);
+            overflow-x: hidden;
+            min-height: 100vh;
+            cursor: default;
+        }
+
+        /* Canvas Background */
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Ambient Glows */
+        .ambient-glow {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.08) 0%, rgba(0,0,0,0) 70%);
+            pointer-events: none;
+            z-index: 1;
+            animation: pulseGlow 10s infinite alternate ease-in-out;
+        }
+        .glow-1 { top: -200px; right: -200px; }
+        .glow-2 { bottom: -200px; left: -200px; background: radial-gradient(circle, rgba(170, 119, 28, 0.1) 0%, rgba(0,0,0,0) 70%); }
+
+        @keyframes pulseGlow {
+            0% { transform: scale(1) translate(0, 0); opacity: 0.5; }
+            100% { transform: scale(1.2) translate(30px, 30px); opacity: 0.9; }
+        }
+
+        /* Container & Grid */
+        .app-container {
+            position: relative;
+            z-index: 2;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 2rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            margin-bottom: 3rem;
+            transition: all 0.4s ease;
+        }
+
+        header:hover {
+            border-color: rgba(212, 175, 55, 0.5);
+            box-shadow: 0 20px 50px rgba(212, 175, 55, 0.1);
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-symbol {
+            width: 50px;
+            height: 50px;
+            background: var(--gold-gradient);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cinzel', serif;
+            font-weight: 900;
+            font-size: 1.5rem;
+            color: #000;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-symbol::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.6), transparent);
+            transform: rotate(45deg);
+            animation: shine 4s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            20%, 100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        .brand-text h1 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .brand-text span {
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            letter-spacing: 2px;
+            display: block;
+            font-family: 'Cinzel', serif;
+        }
+
+        .status-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 18px;
+            background: rgba(212, 175, 55, 0.08);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 30px;
+            font-size: 0.85rem;
+            color: var(--gold-primary);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--gold-light);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--gold-light);
+            animation: blink 1.5s infinite alternate;
+        }
+
+        @keyframes blink {
+            0% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            margin: 2rem 0 4rem;
+            position: relative;
+        }
+
+        .hero-title-large {
+            font-family: 'Cinzel', 'Cairo', serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
+            line-height: 1.1;
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+            color: var(--text-light);
+            font-weight: 300;
+            max-width: 800px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        .gold-divider {
+            height: 2px;
+            width: 150px;
+            background: var(--gold-gradient);
+            margin: 0 auto 3rem;
+            border-radius: 2px;
+            box-shadow: 0 0 15px var(--gold-primary);
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--card-border);
+            border-radius: 28px;
+            padding: 2.5rem 2rem;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(212, 175, 55, 0.08), transparent 40%);
+            pointer-events: none;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(212, 175, 55, 0.6);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6), 0 0 30px rgba(212, 175, 55, 0.15);
+        }
+
+        .card-icon {
+            width: 65px;
+            height: 65px;
+            background: rgba(212, 175, 55, 0.08);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: var(--gold-primary);
+            margin-bottom: 1.5rem;
+            transition: all 0.4s ease;
+        }
+
+        .card:hover .card-icon {
+            background: var(--gold-gradient);
+            color: #000;
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.5);
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #FFF;
+        }
+
+        .card-desc {
+            color: var(--text-dim);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        /* Action Section */
+        .cta-container {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .btn-gold {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 1.2rem 3.5rem;
+            background: var(--gold-gradient);
+            color: #000;
+            font-weight: 800;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            text-decoration: none;
+            box-shadow: 0 10px 35px rgba(212, 175, 55, 0.3);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-gold:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 45px rgba(212, 175, 55, 0.5);
+            letter-spacing: 0.5px;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid rgba(212, 175, 55, 0.15);
+            padding: 2rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold-primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background: var(--gold-primary);
+            color: #000;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .app-container { padding: 1rem; }
+            header { flex-direction: column; gap: 1rem; text-align: center; }
+            footer { flex-direction: column; text-align: center; }
+            .hero-title-large { font-size: 2.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Canvas Animation Background -->
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- Glowing Background Orbs -->
+    <div class="ambient-glow glow-1"></div>
+    <div class="ambient-glow glow-2"></div>
+
+    <!-- Main Container -->
+    <div class="app-container">
+
+        <!-- Top Navigation / Header -->
+        <header>
+            <div class="brand-logo">
+                <div class="logo-symbol">X</div>
+                <div class="brand-text">
+                    <h1>القرماني إكس</h1>
+                    <span>ALQURMANI X | AQX</span>
+                </div>
+            </div>
+            <div class="status-badge">
+                <div class="status-dot"></div>
+                <span>المنصة الرئيسية الرقمية</span>
+            </div>
+        </header>
+
+        <!-- Main Hero Section -->
+        <main>
+            <section class="hero">
+                <h1 class="hero-title-large">ALQURMANI X</h1>
+                <p class="hero-subtitle">
+                    القمة في الابتكار والحلول الرقمية المتكاملة. نبتكر تجارب رقمية فائقة الفخامة تعيد تعريف التميز والجودة.
+                </p>
+                <div class="gold-divider"></div>
+            </section>
+
+            <!-- Features Cards Grid -->
+            <section class="features-grid">
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-crown"></i>
+                    </div>
+                    <h3 class="card-title">فخامة وتصميم رفيع</h3>
+                    <p class="card-desc">
+                        واجهات متطورة مصممة بأعلى معايير الدقة والجمالية، تلبي طموح النخبة وتوفر تجربة استثنائية.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-bolt"></i>
+                    </div>
+                    <h3 class="card-title">أداء فائق وسرعة</h3>
+                    <p class="card-desc">
+                        بنية تحتية برمجية متقدمة تضمن أقصى درجات الاستقرار، السرعة، والفاعلية في معالجة البيانات.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <h3 class="card-title">أمان وتكامل تام</h3>
+                    <p class="card-desc">
+                        أنظمة حماية وتشفير صلبة تضمن سرية البيانات وأمان الموارد الرقمية بكفاءة لا مثيل لها.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Call to Action -->
+            <section class="cta-container">
+                <button class="btn-gold" onclick="alert('مرحباً بك في ALQURMANI X');">
+                    <span>استكشف منظومة AQX</span>
+                    <i class="fa-solid fa-arrow-left"></i>
+                </button>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer>
+            <div>
+                © 2026 <strong>ALQURMANI X</strong>. جميع الحقوق محفوظة.
+            </div>
+            <div class="social-links">
+                <a href="#" class="social-icon" title="موقعنا"><i class="fa-solid fa-globe"></i></a>
+                <a href="#" class="social-icon" title="تويتر"><i class="fa-brands fa-x-twitter"></i></a>
+                <a href="#" class="social-icon" title="لينكد إن"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="#" class="social-icon" title="جيت هاب"><i class="fa-brands fa-github"></i></a>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- Background Particle Interactive Script -->
+    <script>
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        let particles = [];
+        const particleCount = Math.min(width / 10, 100);
+
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            initParticles();
+        });
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.4;
+                this.speedY = (Math.random() - 0.5) * 0.4;
+                this.opacity = Math.random() * 0.6 + 0.2;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x < 0) this.x = width;
+                if (this.x > width) this.x = 0;
+                if (this.y < 0) this.y = height;
+                if (this.y > height) this.y = 0;
+            }
+
+            draw() {
+                ctx.fillStyle = `rgba(212, 175, 55, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 120) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(212, 175, 55, ${0.12 - distance / 1000})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animate);
+        }
+
+        initParticles();
+        animate();
+
+        // Card Glow Track Effect
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+    </script>
+</body>
+</html>
