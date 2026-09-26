@@ -1,1 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <!-- الصفحة الرئيسية لـ Hub -->
+  <url>
+    <loc>https://hub.alqurmanix.com/</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
 
+  <!-- مثال لصفحة هبوط فرعية داخل المستودع -->
+  <url>
+    <loc>https://hub.alqurmanix.com/store-landing.html</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+</urlset>
