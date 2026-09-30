@@ -1,595 +1,1027 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌐</text></svg>">
-    <!-- الأساسيات وتعريف الترميز -->
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>القرماني إكس هب | منصة المشاريع والخدمات والمتاجر</title>
-<meta name="description" content="المنصة المركزية لمشاريع وخدمات القرماني إكس. استكشف المتاجر، الواجهات البرمجية، وصفحات الهبوط التفاعلية لجميع حلولنا.">
-<meta name="robots" content="index, follow">
+  <meta charset="UTF-8">
 
-<!-- رابط الصفحة الأساسي (Canonical) لمنع التكرار -->
-<link rel="canonical" href="https://hub.alqurmanix.com/">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Open Graph / الفيسبوك وواتساب وتليجرام -->
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://hub.alqurmanix.com/">
-<meta property="og:title" content="القرماني إكس هاب | منصة المشاريع والخدمات والمتاجر">
-<meta property="og:description" content="المنصة المركزية لمشاريع وخدمات القرماني إكس. استكشف المتاجر، الواجهات البرمجية، وصفحات الهبوط التفاعلية.">
-<meta property="og:image" content="https://hub.alqurmanix.com/assets/og-image.jpg">
-<meta property="og:site_name" content="القرماني إكس هب">
-<meta property="og:locale" content="ar_AR">
+  <title>AQX HUB | مركز القرماني إكس</title>
 
-<!-- Twitter Cards / منصة إكس -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:url" content="https://hub.alqurmanix.com/">
-<meta name="twitter:title" content="القرماني إكس هاب | منصة المشاريع والخدمات والمتاجر">
-<meta name="twitter:description" content="المنصة المركزية لمشاريع وخدمات القرماني إكس. استكشف المتاجر والخدمات والحلول المبتكرة.">
-<meta name="twitter:image" content="https://hub.alqurmanix.com/assets/og-image.jpg">
+  <meta name="description"
+        content="AQX HUB — البوابة الرقمية الشاملة للقرماني إكس، تجمع الخدمات والمشاريع والمتاجر والمنصات وصفحات الهبوط في مكان واحد.">
 
-<!-- أيقونة الموقع (Favicon) -->
-<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ALQURMANI X | القرماني إكس | AQX</title>
-    <!-- Google Fonts & FontAwesome -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Cinzel:wght@500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        :root {
-            --gold-primary: #D4AF37;
-            --gold-light: #FFDF00;
-            --gold-dark: #AA771C;
-            --gold-gradient: linear-gradient(135deg, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
-            --bg-deep: #050508;
-            --card-bg: rgba(18, 18, 28, 0.65);
-            --card-border: rgba(212, 175, 55, 0.25);
-            --text-light: #F5F5F7;
-            --text-dim: #A1A1AA;
-        }
+  <meta name="robots" content="index, follow, max-image-preview:large">
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Cairo', sans-serif;
-            user-select: none;
-        }
+  <link rel="canonical" href="https://hub.alqurmanix.com/">
 
-        body {
-            background-color: var(--bg-deep);
-            color: var(--text-light);
-            overflow-x: hidden;
-            min-height: 100vh;
-            cursor: default;
-        }
+  <meta name="theme-color" content="#07111f">
 
-        /* Canvas Background */
-        #particle-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            pointer-events: none;
-        }
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="ALQURMANI X">
+  <meta property="og:title" content="AQX HUB | مركز القرماني إكس">
+  <meta property="og:description"
+        content="البوابة الرقمية الشاملة لمشاريع وخدمات ومنصات القرماني إكس.">
+  <meta property="og:url" content="https://hub.alqurmanix.com/">
 
-        /* Ambient Glows */
-        .ambient-glow {
-            position: fixed;
-            width: 600px;
-            height: 600px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(212, 175, 55, 0.08) 0%, rgba(0,0,0,0) 70%);
-            pointer-events: none;
-            z-index: 1;
-            animation: pulseGlow 10s infinite alternate ease-in-out;
-        }
-        .glow-1 { top: -200px; right: -200px; }
-        .glow-2 { bottom: -200px; left: -200px; background: radial-gradient(circle, rgba(170, 119, 28, 0.1) 0%, rgba(0,0,0,0) 70%); }
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AQX HUB | مركز القرماني إكس">
+  <meta name="twitter:description"
+        content="اكتشف منظومة ALQURMANI X الرقمية من بوابة واحدة.">
 
-        @keyframes pulseGlow {
-            0% { transform: scale(1) translate(0, 0); opacity: 0.5; }
-            100% { transform: scale(1.2) translate(30px, 30px); opacity: 0.9; }
-        }
+  <!-- Favicon -->
+  <link rel="icon"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%2307111f'/%3E%3Ctext x='50' y='65' text-anchor='middle' font-size='48' font-family='Arial' font-weight='700' fill='%23ffffff'%3EAQX%3C/text%3E%3C/svg%3E">
 
-        /* Container & Grid */
-        .app-container {
-            position: relative;
-            z-index: 2;
-            max-width: 1300px;
-            margin: 0 auto;
-            padding: 2rem;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "AQX HUB",
+    "alternateName": "ALQURMANI X HUB",
+    "url": "https://hub.alqurmanix.com/",
+    "description": "البوابة الرقمية الشاملة لمشاريع وخدمات ومنصات القرماني إكس",
+    "publisher": {
+      "@type": "Organization",
+      "name": "ALQURMANI X",
+      "url": "https://alqurmanix.com/"
+    },
+    "inLanguage": "ar"
+  }
+  </script>
 
-        /* Header */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.5rem 2rem;
-            background: var(--card-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--card-border);
-            border-radius: 24px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-            margin-bottom: 3rem;
-            transition: all 0.4s ease;
-        }
+  <style>
+    :root{
+      --bg:#07111f;
+      --bg2:#0b1728;
+      --card:rgba(255,255,255,.065);
+      --card-hover:rgba(255,255,255,.10);
+      --border:rgba(255,255,255,.11);
+      --text:#f7f9fc;
+      --muted:#aab6c7;
+      --accent:#7c5cff;
+      --accent2:#24d6b1;
+      --gold:#f5c76a;
+      --shadow:0 25px 70px rgba(0,0,0,.35);
+      --radius:24px;
+    }
 
-        header:hover {
-            border-color: rgba(212, 175, 55, 0.5);
-            box-shadow: 0 20px 50px rgba(212, 175, 55, 0.1);
-        }
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+    }
 
-        .brand-logo {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
+    html{
+      scroll-behavior:smooth;
+    }
 
-        .logo-symbol {
-            width: 50px;
-            height: 50px;
-            background: var(--gold-gradient);
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Cinzel', serif;
-            font-weight: 900;
-            font-size: 1.5rem;
-            color: #000;
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
-            position: relative;
-            overflow: hidden;
-        }
+    body{
+      min-height:100vh;
+      font-family:
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Tahoma,
+        Arial,
+        sans-serif;
+      background:
+        radial-gradient(circle at 85% 10%, rgba(124,92,255,.18), transparent 28%),
+        radial-gradient(circle at 15% 35%, rgba(36,214,177,.10), transparent 24%),
+        linear-gradient(145deg,var(--bg),var(--bg2));
+      color:var(--text);
+      line-height:1.8;
+      overflow-x:hidden;
+    }
 
-        .logo-symbol::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.6), transparent);
-            transform: rotate(45deg);
-            animation: shine 4s infinite;
-        }
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
 
-        @keyframes shine {
-            0% { transform: translateX(-100%) rotate(45deg); }
-            20%, 100% { transform: translateX(100%) rotate(45deg); }
-        }
+    button{
+      font:inherit;
+    }
 
-        .brand-text h1 {
-            font-size: 1.4rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-            background: var(--gold-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+    .container{
+      width:min(1180px,92%);
+      margin:auto;
+    }
 
-        .brand-text span {
-            font-size: 0.75rem;
-            color: var(--text-dim);
-            letter-spacing: 2px;
-            display: block;
-            font-family: 'Cinzel', serif;
-        }
+    /* ================= HEADER ================= */
 
-        .status-badge {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 18px;
-            background: rgba(212, 175, 55, 0.08);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            border-radius: 30px;
-            font-size: 0.85rem;
-            color: var(--gold-primary);
-        }
+    header{
+      position:sticky;
+      top:0;
+      z-index:1000;
+      backdrop-filter:blur(18px);
+      -webkit-backdrop-filter:blur(18px);
+      background:rgba(7,17,31,.76);
+      border-bottom:1px solid rgba(255,255,255,.07);
+    }
 
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            background-color: var(--gold-light);
-            border-radius: 50%;
-            box-shadow: 0 0 10px var(--gold-light);
-            animation: blink 1.5s infinite alternate;
-        }
+    .nav{
+      min-height:76px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+    }
 
-        @keyframes blink {
-            0% { opacity: 0.3; }
-            100% { opacity: 1; }
-        }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      font-weight:900;
+      letter-spacing:.5px;
+    }
 
-        /* Hero Section */
-        .hero {
-            text-align: center;
-            margin: 2rem 0 4rem;
-            position: relative;
-        }
+    .brand-logo{
+      width:46px;
+      height:46px;
+      display:grid;
+      place-items:center;
+      border-radius:14px;
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+      color:white;
+      font-size:14px;
+      box-shadow:0 10px 30px rgba(124,92,255,.25);
+    }
 
-        .hero-title-large {
-            font-family: 'Cinzel', 'Cairo', serif;
-            font-size: clamp(3rem, 8vw, 6rem);
-            font-weight: 900;
-            line-height: 1.1;
-            background: var(--gold-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
-            margin-bottom: 1rem;
-            letter-spacing: 2px;
-        }
+    .brand-text strong{
+      display:block;
+      font-size:16px;
+      line-height:1.2;
+    }
 
-        .hero-subtitle {
-            font-size: clamp(1.1rem, 2.5vw, 1.6rem);
-            color: var(--text-light);
-            font-weight: 300;
-            max-width: 800px;
-            margin: 0 auto 2.5rem;
-            line-height: 1.6;
-            opacity: 0.9;
-        }
+    .brand-text span{
+      display:block;
+      color:var(--muted);
+      font-size:11px;
+      margin-top:2px;
+    }
 
-        .gold-divider {
-            height: 2px;
-            width: 150px;
-            background: var(--gold-gradient);
-            margin: 0 auto 3rem;
-            border-radius: 2px;
-            box-shadow: 0 0 15px var(--gold-primary);
-        }
+    .nav-links{
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
 
-        /* Features Grid */
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-            margin-bottom: 4rem;
-        }
+    .nav-links a{
+      padding:8px 13px;
+      border-radius:12px;
+      color:#cbd5e3;
+      font-size:14px;
+      transition:.25s;
+    }
 
-        .card {
-            background: var(--card-bg);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid var(--card-border);
-            border-radius: 28px;
-            padding: 2.5rem 2rem;
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            overflow: hidden;
-        }
+    .nav-links a:hover{
+      background:rgba(255,255,255,.07);
+      color:white;
+    }
 
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(212, 175, 55, 0.08), transparent 40%);
-            pointer-events: none;
-        }
+    .nav-cta{
+      padding:10px 17px !important;
+      color:white !important;
+      background:linear-gradient(135deg,var(--accent),#5d43d9);
+      box-shadow:0 8px 24px rgba(124,92,255,.2);
+    }
 
-        .card:hover {
-            transform: translateY(-10px);
-            border-color: rgba(212, 175, 55, 0.6);
-            box-shadow: 0 30px 60px rgba(0,0,0,0.6), 0 0 30px rgba(212, 175, 55, 0.15);
-        }
+    /* ================= HERO ================= */
 
-        .card-icon {
-            width: 65px;
-            height: 65px;
-            background: rgba(212, 175, 55, 0.08);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            color: var(--gold-primary);
-            margin-bottom: 1.5rem;
-            transition: all 0.4s ease;
-        }
+    .hero{
+      position:relative;
+      padding:90px 0 70px;
+      text-align:center;
+    }
 
-        .card:hover .card-icon {
-            background: var(--gold-gradient);
-            color: #000;
-            box-shadow: 0 0 25px rgba(212, 175, 55, 0.5);
-        }
+    .hero::before{
+      content:"";
+      position:absolute;
+      width:380px;
+      height:380px;
+      border-radius:50%;
+      background:rgba(124,92,255,.10);
+      filter:blur(70px);
+      top:-130px;
+      left:-100px;
+      pointer-events:none;
+    }
 
-        .card-title {
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: #FFF;
-        }
+    .hero-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:7px 14px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.05);
+      border-radius:999px;
+      color:#dce5f1;
+      font-size:13px;
+      margin-bottom:22px;
+    }
 
-        .card-desc {
-            color: var(--text-dim);
-            font-size: 0.95rem;
-            line-height: 1.7;
-            font-weight: 300;
-        }
+    .hero-badge i{
+      width:8px;
+      height:8px;
+      border-radius:50%;
+      background:var(--accent2);
+      box-shadow:0 0 14px var(--accent2);
+    }
 
-        /* Action Section */
-        .cta-container {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
+    .hero h1{
+      max-width:900px;
+      margin:auto;
+      font-size:clamp(42px,7vw,82px);
+      line-height:1.05;
+      letter-spacing:-2px;
+      font-weight:950;
+    }
 
-        .btn-gold {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            padding: 1.2rem 3.5rem;
-            background: var(--gold-gradient);
-            color: #000;
-            font-weight: 800;
-            font-size: 1.1rem;
-            border-radius: 50px;
-            text-decoration: none;
-            box-shadow: 0 10px 35px rgba(212, 175, 55, 0.3);
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-            border: none;
-            cursor: pointer;
-        }
+    .hero h1 span{
+      background:linear-gradient(90deg,#fff,var(--accent2),#a98fff);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
 
-        .btn-gold:hover {
-            transform: scale(1.05);
-            box-shadow: 0 15px 45px rgba(212, 175, 55, 0.5);
-            letter-spacing: 0.5px;
-        }
+    .hero p{
+      max-width:730px;
+      margin:25px auto 0;
+      color:var(--muted);
+      font-size:clamp(16px,2vw,20px);
+      line-height:1.9;
+    }
 
-        /* Footer */
-        footer {
-            border-top: 1px solid rgba(212, 175, 55, 0.15);
-            padding: 2rem 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-            color: var(--text-dim);
-            font-size: 0.9rem;
-        }
+    .hero-actions{
+      display:flex;
+      justify-content:center;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:32px;
+    }
 
-        .social-links {
-            display: flex;
-            gap: 1rem;
-        }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:50px;
+      padding:0 22px;
+      border-radius:15px;
+      border:1px solid var(--border);
+      transition:.25s;
+      font-weight:800;
+      cursor:pointer;
+    }
 
-        .social-icon {
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--gold-primary);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
+    .btn-primary{
+      background:linear-gradient(135deg,var(--accent),#6044dc);
+      color:white;
+      box-shadow:0 14px 35px rgba(124,92,255,.22);
+    }
 
-        .social-icon:hover {
-            background: var(--gold-primary);
-            color: #000;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
-        }
+    .btn-secondary{
+      background:rgba(255,255,255,.055);
+      color:#eaf0f7;
+    }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .app-container { padding: 1rem; }
-            header { flex-direction: column; gap: 1rem; text-align: center; }
-            footer { flex-direction: column; text-align: center; }
-            .hero-title-large { font-size: 2.8rem; }
-        }
-    </style>
+    .btn:hover{
+      transform:translateY(-3px);
+    }
+
+    /* ================= STATS ================= */
+
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:14px;
+      margin:15px auto 70px;
+      max-width:850px;
+    }
+
+    .stat{
+      padding:20px;
+      border:1px solid var(--border);
+      border-radius:20px;
+      background:rgba(255,255,255,.035);
+    }
+
+    .stat strong{
+      display:block;
+      font-size:25px;
+    }
+
+    .stat span{
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    /* ================= SECTION ================= */
+
+    section{
+      padding:35px 0 80px;
+    }
+
+    .section-head{
+      display:flex;
+      align-items:end;
+      justify-content:space-between;
+      gap:20px;
+      margin-bottom:26px;
+    }
+
+    .section-title{
+      font-size:clamp(25px,4vw,38px);
+      line-height:1.2;
+      font-weight:900;
+    }
+
+    .section-title small{
+      display:block;
+      color:var(--accent2);
+      font-size:12px;
+      letter-spacing:2px;
+      margin-bottom:7px;
+      text-transform:uppercase;
+    }
+
+    .section-desc{
+      color:var(--muted);
+      max-width:580px;
+      font-size:14px;
+    }
+
+    /* ================= PROJECTS ================= */
+
+    .projects{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+    }
+
+    .project{
+      position:relative;
+      min-height:235px;
+      padding:25px;
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      background:
+        linear-gradient(145deg,rgba(255,255,255,.075),rgba(255,255,255,.025));
+      overflow:hidden;
+      transition:.3s;
+    }
+
+    .project::after{
+      content:"";
+      position:absolute;
+      width:130px;
+      height:130px;
+      border-radius:50%;
+      background:rgba(124,92,255,.08);
+      left:-55px;
+      bottom:-55px;
+      filter:blur(4px);
+    }
+
+    .project:hover{
+      transform:translateY(-6px);
+      background:var(--card-hover);
+      border-color:rgba(255,255,255,.2);
+      box-shadow:var(--shadow);
+    }
+
+    .project-icon{
+      width:55px;
+      height:55px;
+      display:grid;
+      place-items:center;
+      border-radius:17px;
+      font-size:26px;
+      background:rgba(255,255,255,.07);
+      border:1px solid rgba(255,255,255,.08);
+      margin-bottom:20px;
+    }
+
+    .project h3{
+      font-size:21px;
+      margin-bottom:6px;
+    }
+
+    .project p{
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.8;
+    }
+
+    .project-link{
+      display:inline-flex;
+      margin-top:18px;
+      color:#dfe6ff;
+      font-size:13px;
+      font-weight:800;
+    }
+
+    /* ================= CATEGORIES ================= */
+
+    .categories{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:13px;
+    }
+
+    .category{
+      padding:20px;
+      border-radius:19px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.035);
+      transition:.25s;
+    }
+
+    .category:hover{
+      transform:translateY(-3px);
+      background:rgba(255,255,255,.07);
+    }
+
+    .category b{
+      display:block;
+      margin-bottom:4px;
+    }
+
+    .category span{
+      color:var(--muted);
+      font-size:12px;
+    }
+
+    /* ================= CTA ================= */
+
+    .cta{
+      position:relative;
+      padding:55px 35px;
+      text-align:center;
+      border-radius:30px;
+      border:1px solid var(--border);
+      background:
+        radial-gradient(circle at center,rgba(124,92,255,.18),transparent 55%),
+        rgba(255,255,255,.035);
+      overflow:hidden;
+    }
+
+    .cta h2{
+      font-size:clamp(28px,5vw,48px);
+      margin-bottom:12px;
+    }
+
+    .cta p{
+      color:var(--muted);
+      max-width:650px;
+      margin:auto;
+    }
+
+    .cta .hero-actions{
+      margin-top:25px;
+    }
+
+    /* ================= FOOTER ================= */
+
+    footer{
+      border-top:1px solid rgba(255,255,255,.08);
+      padding:35px 0;
+      margin-top:20px;
+    }
+
+    .footer-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+    }
+
+    .footer-brand{
+      font-weight:900;
+    }
+
+    .footer-brand span{
+      display:block;
+      color:var(--muted);
+      font-size:12px;
+      font-weight:400;
+      margin-top:3px;
+    }
+
+    .footer-links{
+      display:flex;
+      gap:15px;
+      flex-wrap:wrap;
+    }
+
+    .footer-links a{
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .footer-links a:hover{
+      color:white;
+    }
+
+    .copyright{
+      color:#778397;
+      font-size:12px;
+      text-align:center;
+      margin-top:25px;
+    }
+
+    /* ================= MOBILE ================= */
+
+    @media(max-width:900px){
+
+      .nav-links{
+        display:none;
+      }
+
+      .projects{
+        grid-template-columns:repeat(2,1fr);
+      }
+
+      .categories{
+        grid-template-columns:repeat(2,1fr);
+      }
+    }
+
+    @media(max-width:600px){
+
+      .hero{
+        padding:65px 0 45px;
+      }
+
+      .hero h1{
+        letter-spacing:-1px;
+      }
+
+      .stats{
+        grid-template-columns:1fr;
+        margin-bottom:45px;
+      }
+
+      .projects{
+        grid-template-columns:1fr;
+      }
+
+      .categories{
+        grid-template-columns:1fr 1fr;
+      }
+
+      .section-head{
+        display:block;
+      }
+
+      .section-desc{
+        margin-top:10px;
+      }
+
+      .cta{
+        padding:40px 20px;
+      }
+
+      .footer-inner{
+        display:block;
+        text-align:center;
+      }
+
+      .footer-links{
+        justify-content:center;
+        margin-top:15px;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-    <!-- Canvas Animation Background -->
-    <canvas id="particle-canvas"></canvas>
+  <!-- ================= HEADER ================= -->
 
-    <!-- Glowing Background Orbs -->
-    <div class="ambient-glow glow-1"></div>
-    <div class="ambient-glow glow-2"></div>
+  <header>
+    <div class="container nav">
 
-    <!-- Main Container -->
-    <div class="app-container">
+      <a class="brand" href="/" aria-label="AQX HUB">
+        <div class="brand-logo">AQX</div>
 
-        <!-- Top Navigation / Header -->
-        <header>
-            <div class="brand-logo">
-                <div class="logo-symbol">X</div>
-                <div class="brand-text">
-                    <h1>القرماني إكس</h1>
-                    <span>ALQURMANI X | AQX</span>
-                </div>
-            </div>
-            <div class="status-badge">
-                <div class="status-dot"></div>
-                <span>المنصة الرئيسية الرقمية</span>
-            </div>
-        </header>
+        <div class="brand-text">
+          <strong>ALQURMANI X</strong>
+          <span>AQX HUB</span>
+        </div>
+      </a>
 
-        <!-- Main Hero Section -->
-        <main>
-            <section class="hero">
-                <h1 class="hero-title-large">ALQURMANI X</h1>
-                <p class="hero-subtitle">
-                    القمة في الابتكار والحلول الرقمية المتكاملة. نبتكر تجارب رقمية فائقة الفخامة تعيد تعريف التميز والجودة.
-                </p>
-                <div class="gold-divider"></div>
-            </section>
+      <nav class="nav-links" aria-label="التنقل الرئيسي">
+        <a href="#projects">المشاريع</a>
+        <a href="#categories">الخدمات</a>
+        <a href="#about">عن AQX</a>
+        <a class="nav-cta" href="#contact">تواصل معنا</a>
+      </nav>
 
-            <!-- Features Cards Grid -->
-            <section class="features-grid">
-                <div class="card">
-                    <div class="card-icon">
-                        <i class="fa-solid fa-crown"></i>
-                    </div>
-                    <h3 class="card-title">فخامة وتصميم رفيع</h3>
-                    <p class="card-desc">
-                        واجهات متطورة مصممة بأعلى معايير الدقة والجمالية، تلبي طموح النخبة وتوفر تجربة استثنائية.
-                    </p>
-                </div>
+    </div>
+  </header>
 
-                <div class="card">
-                    <div class="card-icon">
-                        <i class="fa-solid fa-bolt"></i>
-                    </div>
-                    <h3 class="card-title">أداء فائق وسرعة</h3>
-                    <p class="card-desc">
-                        بنية تحتية برمجية متقدمة تضمن أقصى درجات الاستقرار، السرعة، والفاعلية في معالجة البيانات.
-                    </p>
-                </div>
 
-                <div class="card">
-                    <div class="card-icon">
-                        <i class="fa-solid fa-shield-halved"></i>
-                    </div>
-                    <h3 class="card-title">أمان وتكامل تام</h3>
-                    <p class="card-desc">
-                        أنظمة حماية وتشفير صلبة تضمن سرية البيانات وأمان الموارد الرقمية بكفاءة لا مثيل لها.
-                    </p>
-                </div>
-            </section>
+  <main>
 
-            <!-- Call to Action -->
-            <section class="cta-container">
-                <button class="btn-gold" onclick="alert('مرحباً بك في ALQURMANI X');">
-                    <span>استكشف منظومة AQX</span>
-                    <i class="fa-solid fa-arrow-left"></i>
-                </button>
-            </section>
-        </main>
+    <!-- ================= HERO ================= -->
 
-        <!-- Footer -->
-        <footer>
-            <div>
-                © 2026 <strong>ALQURMANI X</strong>. جميع الحقوق محفوظة.
-            </div>
-            <div class="social-links">
-                <a href="#" class="social-icon" title="موقعنا"><i class="fa-solid fa-globe"></i></a>
-                <a href="#" class="social-icon" title="تويتر"><i class="fa-brands fa-x-twitter"></i></a>
-                <a href="#" class="social-icon" title="لينكد إن"><i class="fa-brands fa-linkedin-in"></i></a>
-                <a href="#" class="social-icon" title="جيت هاب"><i class="fa-brands fa-github"></i></a>
-            </div>
-        </footer>
+    <section class="hero">
+
+      <div class="container">
+
+        <div class="hero-badge">
+          <i></i>
+          البوابة الرقمية لمنظومة ALQURMANI X
+        </div>
+
+        <h1>
+          أهلاً بك في
+          <span>AQX HUB</span>
+        </h1>
+
+        <p>
+          مركز واحد يجمع مشاريع وخدمات ومنصات ومتاجر وصفحات
+          <strong>القرماني إكس</strong> في منظومة رقمية متكاملة.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#projects" class="btn btn-primary">
+            استكشف مشاريع AQX
+          </a>
+
+          <a href="#categories" class="btn btn-secondary">
+            اكتشف الخدمات
+          </a>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= STATS ================= -->
+
+    <div class="container">
+
+      <div class="stats">
+
+        <div class="stat">
+          <strong>∞</strong>
+          <span>مساحة مفتوحة للمشاريع</span>
+        </div>
+
+        <div class="stat">
+          <strong>AQX</strong>
+          <span>منظومة رقمية واحدة</span>
+        </div>
+
+        <div class="stat">
+          <strong>24/7</strong>
+          <span>وصول دائم للخدمات</span>
+        </div>
+
+      </div>
 
     </div>
 
-    <!-- Background Particle Interactive Script -->
-    <script>
-        const canvas = document.getElementById('particle-canvas');
-        const ctx = canvas.getContext('2d');
 
-        let width = canvas.width = window.innerWidth;
-        let height = canvas.height = window.innerHeight;
+    <!-- ================= PROJECTS ================= -->
 
-        let particles = [];
-        const particleCount = Math.min(width / 10, 100);
+    <section id="projects">
 
-        window.addEventListener('resize', () => {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-            initParticles();
-        });
+      <div class="container">
 
-        class Particle {
-            constructor() {
-                this.x = Math.random() * width;
-                this.y = Math.random() * height;
-                this.size = Math.random() * 2 + 0.5;
-                this.speedX = (Math.random() - 0.5) * 0.4;
-                this.speedY = (Math.random() - 0.5) * 0.4;
-                this.opacity = Math.random() * 0.6 + 0.2;
-            }
+        <div class="section-head">
 
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
+          <div>
+            <div class="section-title">
+              <small>AQX ECOSYSTEM</small>
+              مشاريع ومنصات AQX
+            </div>
+          </div>
 
-                if (this.x < 0) this.x = width;
-                if (this.x > width) this.x = 0;
-                if (this.y < 0) this.y = height;
-                if (this.y > height) this.y = 0;
-            }
+          <p class="section-desc">
+            مساحة مركزية لاكتشاف المشاريع الرقمية التابعة لمنظومة
+            ALQURMANI X والوصول إليها من مكان واحد.
+          </p>
 
-            draw() {
-                ctx.fillStyle = `rgba(212, 175, 55, ${this.opacity})`;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
-        }
+        </div>
 
-        function initParticles() {
-            particles = [];
-            for (let i = 0; i < particleCount; i++) {
-                particles.push(new Particle());
-            }
-        }
 
-        function animate() {
-            ctx.clearRect(0, 0, width, height);
+        <div class="projects">
 
-            for (let i = 0; i < particles.length; i++) {
-                particles[i].update();
-                particles[i].draw();
+          <!-- FOOD -->
 
-                for (let j = i + 1; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
+          <a class="project" href="/aqx-food.html">
 
-                    if (distance < 120) {
-                        ctx.beginPath();
-                        ctx.strokeStyle = `rgba(212, 175, 55, ${0.12 - distance / 1000})`;
-                        ctx.lineWidth = 0.5;
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.stroke();
-                    }
-                }
-            }
-            requestAnimationFrame(animate);
-        }
+            <div class="project-icon">🍽️</div>
 
-        initParticles();
-        animate();
+            <h3>AQX Food</h3>
 
-        // Card Glow Track Effect
-        document.querySelectorAll('.card').forEach(card => {
-            card.addEventListener('mousemove', e => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                card.style.setProperty('--mouse-x', `${x}px`);
-                card.style.setProperty('--mouse-y', `${y}px`);
-            });
-        });
-    </script>
+            <p>
+              مطبخ القرماني إكس للوصفات والأطباق والأفكار الغذائية
+              والمحتوى المتخصص في عالم الطعام.
+            </p>
+
+            <span class="project-link">
+              اكتشف AQX Food ←
+            </span>
+
+          </a>
+
+
+          <!-- CHEFS -->
+
+          <a class="project" href="/aqx-chefs.html">
+
+            <div class="project-icon">👨‍🍳</div>
+
+            <h3>AQX Chefs</h3>
+
+            <p>
+              مساحة مخصصة للطهاة والمواهب والمبدعين في عالم
+              الطبخ والمحتوى الغذائي.
+            </p>
+
+            <span class="project-link">
+              اكتشف المشروع ←
+            </span>
+
+          </a>
+
+
+          <!-- AD NETWORK -->
+
+          <a class="project" href="/aqx-ad-network.html">
+
+            <div class="project-icon">📢</div>
+
+            <h3>AQX Ad Network</h3>
+
+            <p>
+              منظومة إعلانية رقمية تربط بين المعلنين وأصحاب
+              المواقع والمشاريع الرقمية.
+            </p>
+
+            <span class="project-link">
+              اكتشف المشروع ←
+            </span>
+
+          </a>
+
+
+          <!-- WATCH -->
+
+          <a class="project" href="/aqx-watch.html">
+
+            <div class="project-icon">🎬</div>
+
+            <h3>AQX Watch</h3>
+
+            <p>
+              مساحة للمحتوى المرئي والمشاريع المرتبطة بعالم
+              المشاهدة والفيديو.
+            </p>
+
+            <span class="project-link">
+              اكتشف المشروع ←
+            </span>
+
+          </a>
+
+
+          <!-- JOBS -->
+
+          <a class="project" href="/aqx-jobs.html">
+
+            <div class="project-icon">💼</div>
+
+            <h3>AQX Jobs</h3>
+
+            <p>
+              مساحة للوظائف والفرص المهنية وربط أصحاب الأعمال
+              بالباحثين عن فرص مناسبة.
+            </p>
+
+            <span class="project-link">
+              اكتشف المشروع ←
+            </span>
+
+          </a>
+
+
+          <!-- STORE -->
+
+          <a class="project" href="/aqx-store.html">
+
+            <div class="project-icon">🛍️</div>
+
+            <h3>AQX Store</h3>
+
+            <p>
+              مساحة مخصصة للمتاجر والمنتجات والمشاريع التجارية
+              داخل منظومة AQX.
+            </p>
+
+            <span class="project-link">
+              اكتشف المشروع ←
+            </span>
+
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= CATEGORIES ================= -->
+
+    <section id="categories">
+
+      <div class="container">
+
+        <div class="section-head">
+
+          <div>
+            <div class="section-title">
+              <small>DISCOVER</small>
+              اكتشف منظومة AQX
+            </div>
+          </div>
+
+          <p class="section-desc">
+            المنظومة قابلة للتوسع لإضافة خدمات ومشاريع وصفحات
+            متخصصة جديدة مستقبلًا.
+          </p>
+
+        </div>
+
+
+        <div class="categories">
+
+          <a class="category" href="/aqx-food.html">
+            <b>🍽️ الطعام والمطبخ</b>
+            <span>AQX Food والوصفات والمحتوى الغذائي</span>
+          </a>
+
+          <a class="category" href="/aqx-chefs.html">
+            <b>👨‍🍳 الطهاة</b>
+            <span>المواهب والطهاة والمبدعون</span>
+          </a>
+
+          <a class="category" href="/aqx-ad-network.html">
+            <b>📢 الإعلانات</b>
+            <span>حلول الإعلان الرقمي</span>
+          </a>
+
+          <a class="category" href="/aqx-watch.html">
+            <b>🎬 الفيديو</b>
+            <span>المحتوى المرئي والمشاهدة</span>
+          </a>
+
+          <a class="category" href="/aqx-jobs.html">
+            <b>💼 الوظائف</b>
+            <span>فرص العمل والخدمات المهنية</span>
+          </a>
+
+          <a class="category" href="/aqx-store.html">
+            <b>🛍️ المتاجر</b>
+            <span>المنتجات والمشاريع التجارية</span>
+          </a>
+
+          <a class="category" href="/aqx-services.html">
+            <b>⚙️ الخدمات</b>
+            <span>خدمات ومشاريع رقمية متنوعة</span>
+          </a>
+
+          <a class="category" href="/landing-pages.html">
+            <b>🚀 صفحات الهبوط</b>
+            <span>صفحات متخصصة للحملات والمشاريع</span>
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= ABOUT ================= -->
+
+    <section id="about">
+
+      <div class="container">
+
+        <div class="cta">
+
+          <h2>منصة واحدة... منظومة كاملة</h2>
+
+          <p>
+            AQX HUB هو المدخل المركزي إلى عالم ALQURMANI X،
+            ومصمم ليستوعب المشاريع والخدمات والمنصات الجديدة
+            مع نمو المنظومة وتوسعها.
+          </p>
+
+          <div class="hero-actions">
+
+            <a href="#projects" class="btn btn-primary">
+              تصفح المشاريع
+            </a>
+
+            <a href="https://alqurmanix.com/"
+               class="btn btn-secondary">
+              ALQURMANI X
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= CONTACT ================= -->
+
+    <section id="contact">
+
+      <div class="container">
+
+        <div class="section-head">
+
+          <div>
+            <div class="section-title">
+              <small>CONNECT</small>
+              تواصل مع AQX
+            </div>
+          </div>
+
+          <p class="section-desc">
+            للاستفسارات والشراكات والتعاون والمشاريع الجديدة،
+            يمكنك الوصول إلى بوابة التواصل الخاصة بالقرماني إكس.
+          </p>
+
+        </div>
+
+        <div style="text-align:center">
+
+          <a href="https://alqurmanix.com/"
+             class="btn btn-primary">
+            زيارة ALQURMANI X
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- ================= FOOTER ================= -->
+
+  <footer>
+
+    <div class="container">
+
+      <div class="footer-inner">
+
+        <div class="footer-brand">
+          ALQURMANI X — AQX HUB
+          <span>البوابة الرقمية الشاملة لمنظومة القرماني إكس</span>
+        </div>
+
+        <div class="footer-links">
+          <a href="/">الرئيسية</a>
+          <a href="/aqx-food.html">AQX Food</a>
+          <a href="#projects">المشاريع</a>
+          <a href="#categories">الخدمات</a>
+          <a href="#contact">التواصل</a>
+        </div>
+
+      </div>
+
+      <div class="copyright">
+        © <span id="year"></span> ALQURMANI X. جميع الحقوق محفوظة.
+      </div>
+
+    </div>
+
+  </footer>
+
+
+  <script>
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+  </script>
+
 </body>
 </html>
